@@ -1,12 +1,14 @@
 const TYPES = {
-  LEFT: { startPos: [100, 0], imgUrl: './assets/spungbob.png'},
-  UP: { startPos: [300, 0], imgUrl: './assets/krabs.png'},
-  DOWN: { startPos: [500, 0], imgUrl: './assets/patrick.png'},
-  RIGHT: { startPos: [700, 0], imgUrl: './assets/squid.png'}
+  0: { startPos: [100, 0], imgUrl: './assets/spungbob.png'},
+  1: { startPos: [300, 0], imgUrl: './assets/krabs.png'},
+  2: { startPos: [500, 0], imgUrl: './assets/patrick.png'},
+  3: { startPos: [700, 0], imgUrl: './assets/squid.png'}
 };
 
+const NORMAL_FRAME_TIME_DELTA = 1000 / 60;
+
 class movingArrow {
-// must input type as TYPES[LEFT] for example
+// must input type as TYPES.LEFT for example
   constructor(type, vel = 3) {
     this.type = type,
     this.vel = vel,
@@ -15,8 +17,12 @@ class movingArrow {
     this.image = type.imgUrl;
   };
 
-  move() {
-    this.y += this.vel
+  getType() {
+    return this.type;
+  }
+
+  move(dt = 1) {
+    this.y += this.vel * dt
   };
 
   draw(ctx) {

@@ -1,3 +1,6 @@
+require('./game');
+require('./gameview');
+
 console.log("Webpack is working!");
 
 
@@ -7,8 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
   canvasEl.height = 500;
 
   const ctx = canvasEl.getContext("2d");
+  const game = new Game;
+  new Gameview(game, ctx).start();
 
-  ctx.clearRect(0, 0, 750, 500);
+  // ctx.clearRect(0, 0, 750, 500);
 
 
 });

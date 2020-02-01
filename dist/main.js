@@ -86,14 +86,47 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/arrow.js":
+/*!**********************!*\
+  !*** ./src/arrow.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("const TYPES = {\n  0: { startPos: [100, 0], imgUrl: './assets/spungbob.png'},\n  1: { startPos: [300, 0], imgUrl: './assets/krabs.png'},\n  2: { startPos: [500, 0], imgUrl: './assets/patrick.png'},\n  3: { startPos: [700, 0], imgUrl: './assets/squid.png'}\n};\n\nconst NORMAL_FRAME_TIME_DELTA = 1000 / 60;\n\nclass movingArrow {\n// must input type as TYPES.LEFT for example\n  constructor(type, vel = 3) {\n    this.type = type,\n    this.vel = vel,\n    this.x = type.startPos[0],\n    this.y = type.startPos[1]\n    this.image = type.imgUrl;\n  };\n\n  getType() {\n    return this.type;\n  }\n\n  move(dt = 1) {\n    this.y += this.vel * dt\n  };\n\n  draw(ctx) {\n    // ctx.fillRect(this.x, this.y, 20, 20)\n    const img = new Image;\n    img.onload(function() {\n      ctx.drawImage(img, this.x, this.y)\n    })\n    img.src = this.image; \n  };\n};\n\nmodule.exports = {\n  movingArrow,\n  TYPES\n};\n\n\n\n//# sourceURL=webpack:///./src/arrow.js?");
+
+/***/ }),
+
+/***/ "./src/game.js":
+/*!*********************!*\
+  !*** ./src/game.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const movingArrow = __webpack_require__(/*! ./arrow */ \"./src/arrow.js\");\n\n\nclass Game {\n  constructor() {\n    this.misses = 0;\n    this.arrows = [];\n    this.paused = true;\n  };\n\n\n  addArrow(type) { //type must be entered as TYPES[0]\n    let arrow = new movingArrow(type);\n    // arrow.draw();\n    this.arrows.push(arrow);\n  }\n\n  draw(ctx) {\n    ctx.clearRect(0, 0, 750, 500)\n    this.arrows.forEach( (arrow) => arrow.draw());\n  };\n\n  moveArrows(dt = 1) {\n    this.arrows.forEach( (arrow) => arrow.move(dt));\n  }\n\n  step(dt) {\n    this.moveArrows(dt);\n    this.draw(ctx);\n  }\n};\n\nmodule.exports = Game;\n\n\n//# sourceURL=webpack:///./src/game.js?");
+
+/***/ }),
+
+/***/ "./src/gameview.js":
+/*!*************************!*\
+  !*** ./src/gameview.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("__webpack_require__ (/*! ./game */ \"./src/game.js\");\n\nclass Gameview {\n constructor(game, ctx) {\n   this.ctx = ctx;\n   this.game = game;\n }\n\n start() {\n   this.lastTime = 0;\n   requestAnimationFrame(this.bind(this));\n }\n\n animate(time) {\n   const dt = time - this.lastTime\n   requestAnimationFrame(this.animate.bind(this));\n   this.game.step(dt);\n   this.game.draw();\n   this.lastTime = time\n }\n}\n\nmodule.exports = {Gameview}\n\n//# sourceURL=webpack:///./src/gameview.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("console.log(\"Webpack is working!\");\n\n\ndocument.addEventListener('DOMContentLoaded', function () {\n  const canvasEl = document.getElementById(\"game-canvas\");\n  canvasEl.width = 750;\n  canvasEl.height = 500;\n\n  const ctx = canvasEl.getContext(\"2d\");\n\n  ctx.clearRect(0, 0, 750, 500);\n\n\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__(/*! ./game */ \"./src/game.js\");\n__webpack_require__(/*! ./gameview */ \"./src/gameview.js\");\n\nconsole.log(\"Webpack is working!\");\n\n\ndocument.addEventListener('DOMContentLoaded', function () {\n  const canvasEl = document.getElementById(\"game-canvas\");\n  canvasEl.width = 750;\n  canvasEl.height = 500;\n\n  const ctx = canvasEl.getContext(\"2d\");\n  const game = new Game;\n  new Gameview(game, ctx).start();\n\n  // ctx.clearRect(0, 0, 750, 500);\n\n\n});\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
