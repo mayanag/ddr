@@ -1,4 +1,4 @@
-require ('./game');
+
 
 class Gameview {
  constructor(game, ctx) {
@@ -8,16 +8,16 @@ class Gameview {
 
  start() {
    this.lastTime = 0;
-   requestAnimationFrame(this.bind(this));
+   requestAnimationFrame(this.animate.bind(this));
  }
 
  animate(time) {
    const dt = time - this.lastTime
    requestAnimationFrame(this.animate.bind(this));
    this.game.step(dt);
-   this.game.draw();
+   this.game.draw(this.ctx);
    this.lastTime = time
  }
 }
 
-module.exports = {Gameview}
+module.exports = Gameview;

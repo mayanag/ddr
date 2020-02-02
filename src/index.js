@@ -1,5 +1,5 @@
-require('./game');
-require('./gameview');
+const Game = require('./game');
+const Gameview = require('./gameview');
 
 console.log("Webpack is working!");
 
