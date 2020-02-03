@@ -48,7 +48,7 @@ class MovingArrow {
       setTimeout(function () {
         ctx.clearRect(0, 0, canvas.width, canvas.height);  // clear canvas
         ctx.drawImage(imgTag, x, y, 20, 20);                       // draw image at current position
-        y += this.vel;
+        y += 5;
         if (y < canvas.height) requestAnimationFrame(animate) 
       },100);
              // loop
