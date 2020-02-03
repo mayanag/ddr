@@ -1,4 +1,4 @@
-const movingArrow = require('./arrow');
+const MovingArrow = require('./arrow');
 
 const TYPES = {
   0: { startPos: [100, 0], imgUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png'},
@@ -14,12 +14,12 @@ class Game {
     this.arrows = [];
     this.paused = true;
 
-    this.spawnArrows();
+    //this.spawnArrows();
   };
 
 
   addArrow(type) { //type must be entered as TYPES[0]
-    let arrow = new movingArrow(type);
+    let arrow = new MovingArrow(type);
     // arrow.draw();
     this.arrows.push(arrow);
   }
