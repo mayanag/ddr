@@ -36,9 +36,12 @@ document.addEventListener('DOMContentLoaded', function () {
 function initArrows() {
 
   movingArrows.push(new MovingArrow(0, 5, null));
-  movingArrows.push(new MovingArrow(1, 5, null));
   movingArrows.push(new MovingArrow(2, 5, null));
+  movingArrows.push(new MovingArrow(1, 5, null));
   movingArrows.push(new MovingArrow(3, 5, null));
+  movingArrows.push(new MovingArrow(2, 5, null));
+  movingArrows.push(new MovingArrow(2, 5, null));
+  movingArrows.push(new MovingArrow(0, 5, null));
 }
 function draw(arrowIndex) {
   

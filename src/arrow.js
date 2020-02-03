@@ -1,5 +1,5 @@
 const TYPES = {
-  0: { startX: 100, imgUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/SpongeBob_SquarePants_character.svg/1200px-SpongeBob_SquarePants_character.svg.png'},
+  0: { startX: 100, imgUrl: './assets/spungbob.png'},
   1: { startX: 300,  imgUrl: './assets/krabs.png'},
   2: { startX: 500,  imgUrl: './assets/patrick.png'},
   3: { startX: 700,  imgUrl: './assets/squid.png'}
